@@ -17,7 +17,9 @@ int total_votesa(int a[]);
 int total_votesb(int b[]);
 int total_votesc(int c[]);
 int total_votesd(int d[]);
-int print_chart(int precint[], int a[], int b[], int c[], int d[]);
+int print_chart(int precint[], int a[], int b[], int c[], int d[], int totala, int totalb, int totalc, int totald, int suma, int sumb, int sumc, int sumd);
+
+
 
 int main()
 {
@@ -30,13 +32,17 @@ int main()
 	int sumb = total_votesb(b);
 	int sumc = total_votesc(c);
 	int sumd = total_votesd(d);
-	
-	print_chart(precint,a,b,c,d);
+	int total;
+	total = suma + sumb + sumc + sumd;
+	int totala = suma / total * 100;
+	int totalb = sumb / total * 100;
+	int totalc = sumc / total * 100;
+	int totald = sumd / total;
 
-	//printf("The sum is: %d\n",suma);  Was used for testing to see if the loops were working for the sums
-	//printf("The sum is: %d\n", sumb);
-	//printf("The sum is: %d\n", sumc);
-	//printf("The sum is: %d\n", sumd);
+	
+	print_chart(precint,a,b,c,d,totala,totalb,totalc,totald,suma,sumb,sumc,sumd);
+
+	
 
 
 	
@@ -44,20 +50,20 @@ int main()
 	return;
 }
 
-int total_votesa(int a[])
+int total_votesa(int a[]) //sums up Candidate A
 {
 	int suma = 0;
+	int perca = 0;
 	int i = 0;
 	
 	for (i = 0; i < 5; i++)
 	{
 		suma += a[i];	
 	}
-	
 	return suma;
 }
 
-int total_votesb(int b[])
+int total_votesb(int b[]) //sums up candidate B
 {
 	int i = 0;
 	int sumb = 0;
@@ -69,7 +75,7 @@ int total_votesb(int b[])
 	return sumb;
 }
 
-int total_votesc(int c[])
+int total_votesc(int c[])  //sums up candidate C
 {
 	int i = 0;
 	int sumc = 0;
@@ -80,7 +86,7 @@ int total_votesc(int c[])
 	}
 	return sumc;
 }
-int total_votesd(int d[])
+int total_votesd(int d[]) //sums up candidate D
 {
 	int i = 0;
 	int sumd = 0;
@@ -92,7 +98,7 @@ int total_votesd(int d[])
 	return sumd;
 }
 
-int print_chart(int precint[], int a[], int b[], int c[], int d[])
+int print_chart(int precint[], int a[], int b[], int c[], int d[], int totala, int totalb, int totalc, int totald,int suma, int sumb,int sumc, int sumd)  //formats and prints the chart to the scren
 {
 	int i = 0;
 
@@ -103,8 +109,10 @@ int print_chart(int precint[], int a[], int b[], int c[], int d[])
 		printf("   %d|\t %6d\t\t %6d\t\t %6d\t\t %6d\t\n", precint[i], a[i], b[i], c[i], d[i]);
 
 	}
+	printf("____________________________________________________________________\n");
+	printf("Total\t %6d\t\t %6d\t\t %6d\t\t %6d \n",suma,sumb,sumc,sumd);
+	printf("Percentage| %i\t\t %6i\t\t %6i\t\t %6i \n", totala, totalb, totalc, totald);
 
+} 
 
-
-}
 
