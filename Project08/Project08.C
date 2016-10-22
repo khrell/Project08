@@ -17,6 +17,7 @@ int total_votesa(int a[]);
 int total_votesb(int b[]);
 int total_votesc(int c[]);
 int total_votesd(int d[]);
+int print_chart(int precint[], int a[], int b[], int c[], int d[]);
 
 int main()
 {
@@ -25,17 +26,17 @@ int main()
 	int c[] = { 206, 312, 121, 408, 382 };
 	int d[] = { 37, 21, 38, 39, 29 };
 	int precint[] = { 1,2,3,4,5 };
-
-	
 	int suma = total_votesa(a);
 	int sumb = total_votesb(b);
 	int sumc = total_votesc(c);
 	int sumd = total_votesd(d);
 	
-	printf("The sum is: %d\n",suma);
-	printf("The sum is: %d\n", sumb);
-	printf("The sum is: %d\n", sumc);
-	printf("The sum is: %d\n", sumd);
+	print_chart(precint,a,b,c,d);
+
+	//printf("The sum is: %d\n",suma);  Was used for testing to see if the loops were working for the sums
+	//printf("The sum is: %d\n", sumb);
+	//printf("The sum is: %d\n", sumc);
+	//printf("The sum is: %d\n", sumd);
 
 
 	
@@ -89,5 +90,21 @@ int total_votesd(int d[])
 		sumd += d[i];
 	}
 	return sumd;
+}
+
+int print_chart(int precint[], int a[], int b[], int c[], int d[])
+{
+	int i = 0;
+
+	printf("Precint\t Candidate A\t Candidate B\t Candidate C\t Candidate D\n");
+	printf("____________________________________________________________________\n");
+	for (i = 0; i < 5; i++)
+	{
+		printf("   %d|\t %6d\t\t %6d\t\t %6d\t\t %6d\t\n", precint[i], a[i], b[i], c[i], d[i]);
+
+	}
+
+
+
 }
 
