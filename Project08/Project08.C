@@ -17,9 +17,8 @@ int total_votesa(int a[]);
 int total_votesb(int b[]);
 int total_votesc(int c[]);
 int total_votesd(int d[]);
-int print_chart(int precint[], int a[], int b[], int c[], int d[], int totala, int totalb, int totalc, int totald, int suma, int sumb, int sumc, int sumd);
-
-
+int print_chart(int precint[], int a[], int b[], int c[], int d[], double totala, double totalb, double totalc, double totald, int suma, int sumb, int sumc, int sumd);
+//int winner(double totala, double totalb, double totalc, double totald);
 
 int main()
 {
@@ -32,20 +31,17 @@ int main()
 	int sumb = total_votesb(b);
 	int sumc = total_votesc(c);
 	int sumd = total_votesd(d);
-	int total;
-	total = suma + sumb + sumc + sumd;
-	int totala = suma / total * 100;
-	int totalb = sumb / total * 100;
-	int totalc = sumc / total * 100;
-	int totald = sumd / total;
+	double total = suma + sumb + sumc + sumd;
+
+	double totala = (100 * suma) / total;
+	double totalb = (100 * sumb) / total;
+	double totalc = (100 * sumc)/ total;
+	double totald = (100 * sumd) / total;
 
 	
 	print_chart(precint,a,b,c,d,totala,totalb,totalc,totald,suma,sumb,sumc,sumd);
+	//int winner(double totala, double totalb, double totalc, double totald);
 
-	
-
-
-	
 
 	return;
 }
@@ -53,7 +49,6 @@ int main()
 int total_votesa(int a[]) //sums up Candidate A
 {
 	int suma = 0;
-	int perca = 0;
 	int i = 0;
 	
 	for (i = 0; i < 5; i++)
@@ -98,7 +93,7 @@ int total_votesd(int d[]) //sums up candidate D
 	return sumd;
 }
 
-int print_chart(int precint[], int a[], int b[], int c[], int d[], int totala, int totalb, int totalc, int totald,int suma, int sumb,int sumc, int sumd)  //formats and prints the chart to the scren
+int print_chart(int precint[], int a[], int b[], int c[], int d[], double totala, double totalb, double totalc, double totald,int suma, int sumb,int sumc, int sumd)  //formats and prints the chart to the scren
 {
 	int i = 0;
 
@@ -111,8 +106,14 @@ int print_chart(int precint[], int a[], int b[], int c[], int d[], int totala, i
 	}
 	printf("____________________________________________________________________\n");
 	printf("Total\t %6d\t\t %6d\t\t %6d\t\t %6d \n",suma,sumb,sumc,sumd);
-	printf("Percentage| %i\t\t %6i\t\t %6i\t\t %6i \n", totala, totalb, totalc, totald);
+	printf("Percentage| %.1f%%\t   %.1f%%\t\t   %.1f%%\t   %.1f%% \n", totala, totalb, totalc, totald);
 
 } 
+
+/*int winner(double totala, double totalb, double totalc, double totald)
+{
+	
+	
+}*/
 
 
