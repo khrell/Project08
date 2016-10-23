@@ -20,14 +20,18 @@ int total_votesd(int d[]);
 int print_chart(int precint[], int a[], int b[], int c[], int d[], double totala, double totalb, double totalc, double totald, int suma, int sumb, int sumc, int sumd);
 int winner(double totala, double totalb, double totalc, double totald);
 void order(double *smp, double *lgp);
+void printCandidate(int candidate, int origA, int origB, int origC, int origD);
 
 int main()
 {
+  
+	// ------------------------- First Execution -------------------------
 	/*intializes the arrays*/
 	int a[] = { 192, 147,186,114,267 };
 	int b[] = { 48, 90, 12, 21, 13 };
 	int c[] = { 206, 312, 121, 408, 382 };
 	int d[] = { 37, 21, 38, 39, 29 };
+	int c2[] = { 206, 312, 121, 108, 382 };
 	int precint[] = { 1,2,3,4,5 };
 	
 	/*sums the candidates total votes by precint*/
@@ -43,8 +47,6 @@ int main()
 	double totalc = (100 * sumc)/ total;
 	double totald = (100 * sumd) / total;
 
-	
-	
 	/*calls the method and prints the chart*/
 	print_chart(precint,a,b,c,d,totala,totalb,totalc,totald,suma,sumb,sumc,sumd);
 	
@@ -58,9 +60,65 @@ int main()
 	order(&totalb, &totalc);
 	order(&totalb, &totald);
 	order(&totalc, &totald);
-	printf("The numbers are: %.2f %.2f %.2f %.2f\n", totala, totalb, totalc, totald);
+
+	printf("The numbers are: %.1f %.1f\n", totalc, totald);
+	// -------------------------------------------------------------------
+
+	// ------------------------- Second Exeution -------------------------
+	/*sums the candidates total votes by precint*/
+	suma = total_votesa(a);
+	sumb = total_votesb(b);
+	sumc = total_votesc(c2);
+	sumd = total_votesd(d);
+	total = suma + sumb + sumc + sumd; //gets the total votes for all candidates
+
+											  /*gets percentages of the candidates votes*/
+	totala = (100 * suma) / total;
+	totalb = (100 * sumb) / total;
+	totalc = (100 * sumc) / total;
+	totald = (100 * sumd) / total;
+
+	double origA = totala;
+	double origB = totalb;
+	double origC = totalc;
+	double origD = totald;
+
+	/*calls the method and prints the chart*/
+	print_chart(precint, a, b, c, d, totala, totalb, totalc, totald, suma, sumb, sumc, sumd);
+
+	/*calls the method and prints the winner of the election*/
+	winner(totala, totalb, totalc, totald);
+
+	/*orders the percentages*/
+	order(&totala, &totalb);
+	order(&totala, &totalc);
+	order(&totala, &totald);
+	order(&totalb, &totalc);
+	order(&totalb, &totald);
+	order(&totalc, &totald);
+
+	//printf("The numbers are: %.1f %.1f\n", totalc, totald);
+	// -------------------------------------------------------------------
+	
+	printCandidate(totalc, origA, origB, origC, origD);
+	printCandidate(totald, origA, origB, origC, origD);
 
 	return;
+}
+
+void printCandidate(int candidate, int origA, int origB, int origC, int origD) {
+	if (candidate == origA) {
+		printf("Candidate A\n");
+	}
+	else if (candidate == origB) {
+		printf("Candidate B\n");
+	}
+	else if (candidate == origC) {
+		printf("Candidate C\n");
+	}
+	else if (candidate == origD) {
+		printf("Candidate D\n");
+	}
 }
 
 int total_votesa(int a[]) //sums up Candidate A
@@ -150,17 +208,21 @@ int winner(double totala, double totalb, double totalc, double totald)
 	else
 	{
 		printf("There will be a runoff between the two highest !\n");
-		
+		//printf("The numbers are: %.1f %.1f\n", totalc, totald);
 	}
 }
 
 void order(double *smp, double *lgp)
 {
 	
-	double temp = 0;
+	double temp;
 
-	if (*smp > *lgp) 
+	if (*smp > *lgp) {
 		temp = *smp;
-		*smp = *lgp; *lgp = temp;
+
+		*smp = *lgp;
+		*lgp = temp;
+
+	}
 
 }
