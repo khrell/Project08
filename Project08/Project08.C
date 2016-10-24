@@ -17,7 +17,7 @@ int total_votesa(int a[]);
 int total_votesb(int b[]);
 int total_votesc(int c[]);
 int total_votesd(int d[]);
-int print_chart(int precint[], int a[], int b[], int c[], int d[], double totala, double totalb, double totalc, double totald, int suma, int sumb, int sumc, int sumd);
+int print_chart(int x,int precint[], int a[], int b[], int c[], int d[], double totala, double totalb, double totalc, double totald, int suma, int sumb, int sumc, int sumd);
 int winner(double totala, double totalb, double totalc, double totald);
 void order(double *smp, double *lgp);
 void printCandidate(int candidate, int origA, int origB, int origC, int origD);
@@ -32,6 +32,14 @@ int main()
 	int c[] = { 206, 312, 121, 408, 382 };
 	int d[] = { 37, 21, 38, 39, 29 };
 	int c2[] = { 206, 312, 121, 108, 382 };
+	/*Intializes the 6x6 array*/
+	int x[6][6] = { { 1,2,3,4,5 },
+					{ 192, 147,186,114,267},
+					{ 48, 90, 12, 21, 13 },
+					{ 206, 312, 121, 408, 382 },
+					{ 37, 21, 38, 39, 29 },
+					{ 206, 312, 121, 108, 382 } };
+
 	int precint[] = { 1,2,3,4,5 };
 	
 	/*sums the candidates total votes by precint*/
@@ -85,7 +93,7 @@ int main()
 	double origD = totald;
 
 	/*calls the method and prints the chart*/
-	print_chart(precint, a, b, c, d, totala, totalb, totalc, totald, suma, sumb, sumc, sumd);
+	print_chart(precint, a, b, c, d, totala, totalb, totalc, totald, suma, sumb, sumc, sumd,x);
 
 	/*calls the method and prints the winner of the election*/
 	winner(totala, totalb, totalc, totald);
@@ -173,17 +181,21 @@ int total_votesd(int d[]) //sums up candidate D
 }
 
 /*Formats the chart and inputs the data from the arrays*/
-int print_chart(int precint[], int a[], int b[], int c[], int d[], double totala, double totalb, double totalc, double totald,int suma, int sumb,int sumc, int sumd)  //formats and prints the chart to the scren
+int print_chart(int x,int precint[], int a[], int b[], int c[], int d[], double totala, double totalb, double totalc, double totald,int suma, int sumb,int sumc, int sumd)  //formats and prints the chart to the scren
 {
 	int i = 0;
 
 	printf("Precint\t Candidate A\t Candidate B\t Candidate C\t Candidate D\n");
 	printf("____________________________________________________________________\n");
-	for (i = 0; i < 5; i++)
+	for (i = 0; i < 6; i++)
 	{
+		printf("%d|\t %6d\t\t %6d\t\t %6d\t\t %6d\t\n", x[i);
+	}
+		
+		/*{
 		printf("   %d|\t %6d\t\t %6d\t\t %6d\t\t %6d\t\n", precint[i], a[i], b[i], c[i], d[i]);
 
-	}
+		}*/
 	printf("____________________________________________________________________\n");
 	printf("Total\t %6d\t\t %6d\t\t %6d\t\t %6d \n",suma,sumb,sumc,sumd);
 	printf("Percentage| %.1f%%\t   %.1f%%\t\t   %.1f%%\t   %.1f%% \n\n", totala, totalb, totalc, totald);
