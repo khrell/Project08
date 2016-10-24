@@ -72,12 +72,13 @@ int main()
 	sumd = total_votesd(d);
 	total = suma + sumb + sumc + sumd; //gets the total votes for all candidates
 
-											  /*gets percentages of the candidates votes*/
+	/*gets percentages of the candidates votes*/
 	totala = (100 * suma) / total;
 	totalb = (100 * sumb) / total;
 	totalc = (100 * sumc) / total;
 	totald = (100 * sumd) / total;
 
+	/*pointers to the original values for sorting candidates later*/
 	double origA = totala;
 	double origB = totalb;
 	double origC = totalc;
@@ -100,12 +101,15 @@ int main()
 	//printf("The numbers are: %.1f %.1f\n", totalc, totald);
 	// -------------------------------------------------------------------
 	
+	/*calls method to find second highest value*/
 	printCandidate(totalc, origA, origB, origC, origD);
+
+	/*calls the method again to find the highest value*/
 	printCandidate(totald, origA, origB, origC, origD);
 
 	return;
 }
-
+/* prints out one of the two highest winners*/
 void printCandidate(int candidate, int origA, int origB, int origC, int origD) {
 	if (candidate == origA) {
 		printf("Candidate A\n");
@@ -168,6 +172,7 @@ int total_votesd(int d[]) //sums up candidate D
 	return sumd;
 }
 
+/*Formats the chart and inputs the data from the arrays*/
 int print_chart(int precint[], int a[], int b[], int c[], int d[], double totala, double totalb, double totalc, double totald,int suma, int sumb,int sumc, int sumd)  //formats and prints the chart to the scren
 {
 	int i = 0;
@@ -185,6 +190,7 @@ int print_chart(int precint[], int a[], int b[], int c[], int d[], double totala
 
 } 
 
+/*checks the percentages and prints the winner for anyone over 50% */
 int winner(double totala, double totalb, double totalc, double totald)
 {
 	
@@ -207,22 +213,23 @@ int winner(double totala, double totalb, double totalc, double totald)
 			
 	else
 	{
-		printf("There will be a runoff between the two highest !\n");
+		printf("There will be a runoff between the two highest percentage candidates!\n");
 		//printf("The numbers are: %.1f %.1f\n", totalc, totald);
 	}
 }
 
+/*Ordering method to compare numbers*/
 void order(double *smp, double *lgp)
 {
 	
 	double temp;
 
-	if (*smp > *lgp) {
+	if (*smp > *lgp) 
+	{
 		temp = *smp;
 
 		*smp = *lgp;
 		*lgp = temp;
-
 	}
 
 }
